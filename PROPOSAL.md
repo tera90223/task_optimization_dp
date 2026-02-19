@@ -47,9 +47,9 @@
    * We can keep track of execution time across tasks and measure time across different constraints. We can also monitor memory usage.
    * To mitigate this problem, discretizing constraints like instead of using minutes for each task duration we can utilize 15-minute blocks may help. 
   3. Evaluation Issues
-     * My evaluation and conclusions are bounded by the model and synthetic assumptions.
-     * We can test sensitivity to value and constraint distributions, and also test across different data sizes. The goal is to look for patterns to suggest dependence on model and synthetic assumptions.
-     * This is a proof of concept study and not a real-world validation study. 
+   * My evaluation and conclusions are bounded by the model and synthetic assumptions.
+   * We can test sensitivity to value and constraint distributions, and also test across different data sizes. The goal is to look for patterns to suggest dependence on model and synthetic assumptions.
+   * This is a proof of concept study and not a real-world validation study. 
 
 ## 7. Planned Repository Structure
 - Scripts/
