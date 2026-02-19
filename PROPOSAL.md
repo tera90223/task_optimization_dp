@@ -40,14 +40,17 @@
  ## 6. Pitfall Scan     
   1. Data Related Issues
   2. Algorithmic Issues
-  3. Evaluation Issues
+   * One issue is that 0/1 knapsack can be computationally expensive asruntime and memory tends to scales linearly with each constraint. Dynamic Programming are pseudo-polynomial and for this program, runtime will take O(n*D*C), where n = number of tasks, D = Duration and C = Cognitive capcity. This is important to note as we scale our synthetic dataset. 
+   * We can keep track of execution time across tasks and measure time across different constraints. We can also monitor memory usage.
+   * To mitigate this problem, discretizing constraints like instead of using minutes for each task duration we can utilize 15-minute blocks may help. 
+  4. Evaluation Issues
 
 ## 7. Planned Repository Structure
-Scripts/
-| python scripts
-Analysis/ 
-| Notebook with Analysis
-Documentation /
-| PROPOSAL.md
-README.md
+- Scripts/
+   - python scripts
+- Analysis/
+   - Notebook with Analysis
+- Documentation /
+   - PROPOSAL.md
+- README.md
 
