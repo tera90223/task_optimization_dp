@@ -39,11 +39,14 @@
      
  ## 6. Pitfall Scan     
   1. Data Related Issues
+   * Since the dataset is synthetically generated, the distributions and assumptions concerning duration, cognitive load, and value mau influence performance differences between greedy algorithm and dynamic programming comparison.
+   * To track bias, we could utilize correlation analysis across features and run different parameters.
+   * To mitigate bias, we could generate multiple datasets with varying correlation structures.
   2. Algorithmic Issues
    * One issue is that 0/1 knapsack can be computationally expensive asruntime and memory tends to scales linearly with each constraint. Dynamic Programming are pseudo-polynomial and for this program, runtime will take O(n*D*C), where n = number of tasks, D = Duration and C = Cognitive capcity. This is important to note as we scale our synthetic dataset. 
    * We can keep track of execution time across tasks and measure time across different constraints. We can also monitor memory usage.
    * To mitigate this problem, discretizing constraints like instead of using minutes for each task duration we can utilize 15-minute blocks may help. 
-  4. Evaluation Issues
+  3. Evaluation Issues
 
 ## 7. Planned Repository Structure
 - Scripts/
