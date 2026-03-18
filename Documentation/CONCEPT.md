@@ -39,23 +39,33 @@ Output: Reason
 Example: 
 1 -> "Cognitive Capacity Exceeded"
 
-## Knapsack
+## Build Knapsack array
 *Note to self: The deadline tiers already acts like a bucket (urgency bucketing continuous discretization can be future extension) The idea is that the deadline tiers are ranked by capacity cost based on how close the deadline is so it can easily be added to the cognitive cost collapsing this into a classic knapsack problem*
 
 ```
 Input: Leftover Tasks, Remaining Capacity
+Goal: The goal is to build the knapsack array 
 
 * W = Remaining Cognitive Capacity
 * Values = Array of priority per task
 * Weights = Array of cognitive cost + deadline tier per task
 
 * Create a 2D array with number of tasks (O to len(tasks) and capacity (0 to W)
+* Initialize the first row and column of the @D array with zeros
 
-* for c in range(1, W+1):
-   * for r in range(0, len(tasks)):
-      * if weight[0] > current_W
-         *continue
-      *
+* for r in range(0, len(tasks)):
+   * for c in range(1, W+1):
+      * task_weight = Weights[r]
+      * if task_weight > c:
+          
+          * array[r][c] = array[r-1][c]
+      * else
+          * weight_diff = c - task_weight 
+          * kept_score = Values[r] + array[r-1][weight_diff]
+          * final_score = max(array[r-1][c], kept_score)
+          * array[r][c] = final_score
+
+*return array
 
 ```
 ## Greedy
