@@ -209,6 +209,32 @@ I will verify correctness, by creating a test example and testing if my data ret
 I will also create synthetic data that also can stress both algorithms. 
 
 # Updated Pitfall and Risk Log
+**Data Related Issues**
+Since the dataset is synthetically generated, the distributions and assumptions concerning duration, cognitive load, and value mau influence performance differences between greedy algorithm and dynamic programming comparison.
+
+- To track bias, we could utilize correlation analysis across features and run different parameters.
+- To mitigate bias, we could generate multiple datasets with varying correlation structures.
+
+  
+**Algorithmic Issues**
+One issue is that 0/1 knapsack can be computationally expensive as runtime and memory tends to scales linearly with each constraint. Dynamic Programming are pseudo-polynomial and for this program, runtime will take O(nDC), where n = number of tasks, D = Duration and C = Cognitive capcity. This is important to note as we scale our synthetic dataset.
+
+- We can keep track of execution time across tasks and measure time across different constraints. We can also monitor memory usage.
+- To mitigate this problem, discretizing constraints like instead of using minutes for each task duration we can utilize 15-minute blocks may help.
+
+While writing the pseudocode, I had to be mindful while designing the value and weight combination for dynamic programming, as if I was not careful the DP algorithm could easily collapse into a greedy algorithm.
+
+- To mitigate, created composite scores so only one value is being maximized, and allowing for one weight, ensuring DP considered the combinations instead of rankings.
+
+One issue is that the mandatory scheduling of "today" tasks can create artificial results that appear to be similar. 
+
+- To mitigate, test cases would vary how many today tasks are included, so that we can differentiate between the results of the two algorithms.
+  
+**Evaluation Issues**
+My evaluation and conclusions are bounded by the model and synthetic assumptions.
+
+- We can test sensitivity to value and constraint distributions, and also test across different data sizes. The goal is to look for patterns to suggest dependence on model and synthetic assumptions.
+- This is a proof of concept study and not a real-world validation study.
 
 # Generative AI Disclosure
 Claude Sonnet 4.6 was utilized to improve readability by checking for syntax and grammatical errors, and made sure my idea was stated plainly. 
