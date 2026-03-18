@@ -35,10 +35,13 @@ Given a daily task list in csv format with the following information:
 
 
 ## Reason Code Lookup Function
+This function not fleshed out yet as I am unsure if it is necessary or not. Please ignore.
+```
 Input: Reason Code (Int)
 Output: Reason
 Example: 
 1 -> "Cognitive Capacity Exceeded"
+```
 
 ## Knapsack 
 ### Build Knapsack array
