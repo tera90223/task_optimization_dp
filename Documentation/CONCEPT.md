@@ -39,7 +39,10 @@ Example:
 1 -> "Cognitive Capacity Exceeded"
 
 ## Scheduling_Deadline_Tasks
-Input: DF
+```
+Input: DF, cognitive capacity
+Goal: This function prioritizes deadlines set today and add them to the final to-do list despite cognitive load
+
  * Initialize empty Final To-Do List
  * Initialize empty remaining tasks list
    
@@ -47,7 +50,10 @@ Input: DF
     * Check if deadline is today
       *   append ID to final to-do list and remove from df
       *   subtract cognitive cost from cognitive capacity
-  
+   * Append tasks to remaining task list
+
+return final to-do list, remaining task list, cognitive capacity
+```
 
 ## Main
 ```
@@ -62,14 +68,13 @@ Input CSV file
 
 * Check if len(df) > 0
  * final_list, leftover_tasks, remaining_capacity =  Scheduling_Deadline_Tasks (df, cognitive capacity)
- * if cognitive capacity < 0:
+ * if remaining_capacity < 0:
     * Update Leftover Tasks with task id and reason code
-    * Return Final To-do List, Leftover Task, Dictionary
-  * Run greedy or knapsack algorithm and store results
-  * Return results
-  
-  * Return 
-* else return "No tasks for today"
+    * Return Final To-do List, Leftover Task Dictionary
+ * dp_scheduled, dp_unscheduled = knapsack(leftover_tasks, remaining_capacity)
+ * g_scheduled, d_unscheduled = greedy(leftover_tasks, remaining_capacity)
+
+* else print "No tasks for today"
 
       
 ```
