@@ -7,7 +7,7 @@ This project considers task optimization under two constraints: time and cogniti
 
 ## Input
 
-Given a daily task list with the following information: 
+Given a daily task list in csv format with the following information: 
 
 | Name | Description | Data Type | 
 | :--: | :---------: | :-------: |
@@ -20,7 +20,6 @@ Given a daily task list with the following information:
 ## Output
 * A recommended task list, ordered based on capacity and deadline.
 * Tasks that were not completed
-* A warning if Cognitive Capacity was exceeded
 
 ## Assumptions
 * Cognitive Capacity is a value between 0 and 100.
@@ -28,8 +27,52 @@ Given a daily task list with the following information:
 * Priority is binary: high or low
 * Tasks have to be fully completed - it is either done or not done.
 * If a task has a deadline of today, it is scheduled regardless of whether it exceeds the remaining Cognitive Capacity
+* All tasks are complete records
+* The input file is a CSV file that represents one day of daily tasks for an individual. 
 
 # Pseudocode
+
+## Reason Code Lookup Function
+Input: Reason Code (Int)
+Output: Reason
+Example: 
+1 -> "Cognitive Capacity Exceeded"
+
+
+## Main
+```
+Input CSV file 
+
+* Read file and parse into a dataframe excluding cognitive capacity
+* Initialize Cognitive Capacity using data in csv file
+* Validate no fields are missing as per assumption
+
+* Initialize empty Final To-Do List
+* Initialize empty Leftover Tasks Dictionary {task_id : reason_code}
+
+* Check if len(df) > 0
+  *  for task in task_list:
+    * Check if deadline is today
+      *   append ID to final to-do list
+      *   subtract cognitive cost from cognitive capacity
+  * if cognitive capacity < 0:
+    * Update Leftover Tasks with task id and reason code
+    * Return Final To-do List, Leftover Task, Dictionary
+  * Run greedy or knapsack algorithm and store results
+  * Return results
+  
+  * Return 
+* else return "No tasks for today"
+
+      
+```
+
+Provide pseudocode that:
+Has clear function signatures or step headings.
+Explicitly describes main loops, conditionals, and data structures.
+Handles at least one non-trivial edge case (e.g., empty input, unexpected characters, disconnected graph).
+Use code-style formatting (indented blocks, consistent naming) so that another student could implement it in Python or another language.
+main
 # Complexity and Bottlenecks
 # Validation and Testing Plan
 # Updated Pitfall and Risk Log
