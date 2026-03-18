@@ -32,11 +32,21 @@ Given a daily task list in csv format with the following information:
 
 # Pseudocode
 
+
 ## Reason Code Lookup Function
 Input: Reason Code (Int)
 Output: Reason
 Example: 
 1 -> "Cognitive Capacity Exceeded"
+
+## Knapsack
+```
+Input: Leftover Tasks, Remaining Capacity 
+```
+## Greedy
+```
+Input: Leftover Tasks, Remaining Capacity 
+```
 
 ## Scheduling_Deadline_Tasks
 ```
@@ -63,17 +73,23 @@ Input CSV file
 * Initialize Cognitive Capacity using data in csv file
 * Validate no fields are missing as per assumption
 
+
 * Initialize empty Leftover Tasks Dictionary {task_id : reason_code}
 
 
 * Check if len(df) > 0
- * final_list, leftover_tasks, remaining_capacity =  Scheduling_Deadline_Tasks (df, cognitive capacity)
- * if remaining_capacity < 0:
+   * deadline_list, leftover_tasks, remaining_capacity =  Scheduling_Deadline_Tasks (df, cognitive capacity)
+   * if remaining_capacity < 0:
     * Update Leftover Tasks with task id and reason code
     * Return Final To-do List, Leftover Task Dictionary
- * dp_scheduled, dp_unscheduled = knapsack(leftover_tasks, remaining_capacity)
- * g_scheduled, d_unscheduled = greedy(leftover_tasks, remaining_capacity)
+   * dp_scheduled, dp_unscheduled = Knapsack(leftover_tasks, remaining_capacity)
+   * g_scheduled, d_unscheduled = Greedy(leftover_tasks, remaining_capacity)
+   
+   * Initialize empty DP Final To-Do List
+   * Append deadline_list + dp_scheduled to DP final to-do list
 
+   * Initialize empty Greedy Final To-Do List
+   * Append deadline_list + g_scheduled to Greedy final to-do list
 * else print "No tasks for today"
 
       
@@ -87,6 +103,7 @@ Use code-style formatting (indented blocks, consistent naming) so that another s
 main
 # Complexity and Bottlenecks
 # Validation and Testing Plan
+
 # Updated Pitfall and Risk Log
 
 # Generative AI Disclosure
