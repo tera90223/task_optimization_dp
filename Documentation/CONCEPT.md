@@ -38,6 +38,16 @@ Output: Reason
 Example: 
 1 -> "Cognitive Capacity Exceeded"
 
+## Scheduling_Deadline_Tasks
+Input: DF
+ * Initialize empty Final To-Do List
+ * Initialize empty remaining tasks list
+   
+ *  for task in task_list:
+    * Check if deadline is today
+      *   append ID to final to-do list and remove from df
+      *   subtract cognitive cost from cognitive capacity
+  
 
 ## Main
 ```
@@ -47,15 +57,12 @@ Input CSV file
 * Initialize Cognitive Capacity using data in csv file
 * Validate no fields are missing as per assumption
 
-* Initialize empty Final To-Do List
 * Initialize empty Leftover Tasks Dictionary {task_id : reason_code}
 
+
 * Check if len(df) > 0
-  *  for task in task_list:
-    * Check if deadline is today
-      *   append ID to final to-do list
-      *   subtract cognitive cost from cognitive capacity
-  * if cognitive capacity < 0:
+ * final_list, leftover_tasks, remaining_capacity =  Scheduling_Deadline_Tasks (df, cognitive capacity)
+ * if cognitive capacity < 0:
     * Update Leftover Tasks with task id and reason code
     * Return Final To-do List, Leftover Task, Dictionary
   * Run greedy or knapsack algorithm and store results
