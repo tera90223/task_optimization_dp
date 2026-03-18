@@ -44,24 +44,32 @@ Example:
 
 ```
 Input: Leftover Tasks, Remaining Capacity
-Goal: The goal is to build the knapsack array 
+Goal: The goal is to build the knapsack array
 
 * W = Remaining Cognitive Capacity
 * Values = Array of priority per task
 * Weights = Array of cognitive cost + deadline tier per task
 
 * Create a 2D array with number of tasks (O to len(tasks) and capacity (0 to W)
-* Initialize the first row and column of the @D array with zeros
+* Initialize the first row and column of the 2D array with zeros
 
-* for r in range(0, len(tasks)):
+# Go through each row which represents one task 
+* for r in range(0, len(tasks)+1):
+   # For each column, we will calaculate a score based on capacities ranging from 1 - W
    * for c in range(1, W+1):
-      * task_weight = Weights[r]
+      # This is the cost of the task
+      * task_weight = Weights[r-1]
+      # If the cost of the task is greater than the capacity represented by the column, we skip it
       * if task_weight > c:
-          
+          # We use the previous score of the row above the column
           * array[r][c] = array[r-1][c]
+      # On the other hand, if the capacity cost of the task is <= the capacity represented by the column, we are tasked to see which score is more, that if we skip it or that if we keep it
       * else
-          * weight_diff = c - task_weight 
-          * kept_score = Values[r] + array[r-1][weight_diff]
+          # First we will calculate if we keep the score, we want to remove the cost from the max capacity
+          * weight_diff = c - task_weight
+          # the score is calculated by adding the priority of the task to the remaining score... to get the remaining score, you look one row above, and you choose the column based on the weight difference we observed previously.
+          * kept_score = Values[r-1] + array[r-1][weight_diff]
+          # The final score takes the max of the kept score and the previous score which is the row above (same column)
           * final_score = max(array[r-1][c], kept_score)
           * array[r][c] = final_score
 
