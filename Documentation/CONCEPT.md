@@ -28,7 +28,8 @@ Given a daily task list in csv format with the following information:
 * Tasks have to be fully completed - it is either done or not done.
 * If a task has a deadline of today, it is scheduled regardless of whether it exceeds the remaining Cognitive Capacity
 * All tasks are complete records
-* The input file is a CSV file that represents one day of daily tasks for an individual. 
+* The input file is a CSV file that represents one day of daily tasks for an individual.
+* Total tasks is capped at 100
 
 # Pseudocode
 
@@ -189,12 +190,13 @@ Input CSV file
 
    * Initialize empty Greedy Final To-Do List
    * Append deadline_list + g_scheduled to Greedy final to-do list
-* else print "No tasks for today"
-
-      
+* else print "No tasks for today" 
 ```
-
 # Complexity and Bottlenecks
+As this is a proof of concept based on an average person daily tasks, this data wouldn't necessarily get large. Even the busiest person has less than 100 tasks per day therefore both the number of tasks and the max capacity load is constrained realistically.
+
+The most expensive portion of each algorithm is building the knapsack array (O(nxW)) and sorting the df in the greedy algorithm (typically O(n log n)). Both are nelgibile when it comes to both time and space. With that being said if I wanted to be more efficient, the way the knapsack array is set up suggests there is a way to build it more efficiently such as making it a 1D array only capturing the traceback data, although it would require more research on my part.
+
 # Validation and Testing Plan
 
 # Updated Pitfall and Risk Log
