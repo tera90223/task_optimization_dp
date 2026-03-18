@@ -116,12 +116,14 @@ Goal: To return scheduled and unscheduled tasks after tracing the knapsack array
 
 ```
 ### Knapsack Driver
+```
 Input: Leftover Tasks, Remaining Capacity
 
 * array = Build knapsack array(tasks, W) 
 * scheduled, unscheduled = traceback(array, tasks) 
 * Return scheduled and unscheduled list
 
+```
 ## Greedy
 ```
 Input: Leftover Tasks, Remaining Capacity 
