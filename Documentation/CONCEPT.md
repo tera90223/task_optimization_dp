@@ -39,12 +39,14 @@ Output: Reason
 Example: 
 1 -> "Cognitive Capacity Exceeded"
 
-## Build Knapsack array
+## Knapsack 
+### Build Knapsack array
 *Note to self: The deadline tiers already acts like a bucket (urgency bucketing continuous discretization can be future extension) The idea is that the deadline tiers are ranked by capacity cost based on how close the deadline is so it can easily be added to the cognitive cost collapsing this into a classic knapsack problem*
 
 ```
-Input: Leftover Tasks, Remaining Capacity
+Input: Input: Leftover Tasks, Remaining Capacity
 Goal: The goal is to build the knapsack array
+
 
 * W = Remaining Cognitive Capacity
 * Values = Array of priority per task
@@ -55,20 +57,28 @@ Goal: The goal is to build the knapsack array
 
 # Go through each row which represents one task 
 * for r in range(0, len(tasks)+1):
+
    # For each column, we will calaculate a score based on capacities ranging from 1 - W
    * for c in range(1, W+1):
+
       # This is the cost of the task
       * task_weight = Weights[r-1]
+
       # If the cost of the task is greater than the capacity represented by the column, we skip it
       * if task_weight > c:
+
           # We use the previous score of the row above the column
           * array[r][c] = array[r-1][c]
+
       # On the other hand, if the capacity cost of the task is <= the capacity represented by the column, we are tasked to see which score is more, that if we skip it or that if we keep it
       * else
+
           # First we will calculate if we keep the score, we want to remove the cost from the max capacity
           * weight_diff = c - task_weight
+
           # the score is calculated by adding the priority of the task to the remaining score... to get the remaining score, you look one row above, and you choose the column based on the weight difference we observed previously.
           * kept_score = Values[r-1] + array[r-1][weight_diff]
+
           # The final score takes the max of the kept score and the previous score which is the row above (same column)
           * final_score = max(array[r-1][c], kept_score)
           * array[r][c] = final_score
@@ -76,6 +86,42 @@ Goal: The goal is to build the knapsack array
 *return array
 
 ```
+
+### Build Knapsack Traceback
+```
+Input: Knapsack Array, Tasks
+Goal: To return scheduled and unscheduled tasks after tracing the knapsack array
+
+# Initialize an empty list for scheduled and a full list of all tasks in the unscheduled 
+* Initialize empty scheduled list
+* Initialize task ids to unscheduled list
+
+# c = W which is the last column of the array
+* c = W
+
+# Starting at the last row and last column, decrement through each row
+* for r in range(len(tasks), 0, -1):
+   # Compare the current row score to the score above (row - 1, column is same)
+   * if array[r][c] != array[r-1][c]
+      # if it is different that means the row was added to the knapsack so we want to append it to our task list
+      * append tasks[id][r] to scheduled list
+      # Remove the task from the unscheduled list
+      * remove task[r] from unscheduled list
+      # The capacity decreases by the weight of the task according the current row
+      * c = c - Task[Weights][r-1]
+
+# Return scheduled and unscheduled to-do lists 
+* return scheduled, unscheduled
+      
+
+```
+### Knapsack Driver
+Input: Leftover Tasks, Remaining Capacity
+
+* array = Build knapsack array(tasks, W) 
+* scheduled, unscheduled = traceback(array, tasks) 
+* Return scheduled and unscheduled list
+
 ## Greedy
 ```
 Input: Leftover Tasks, Remaining Capacity 
