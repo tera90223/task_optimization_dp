@@ -198,6 +198,15 @@ As this is a proof of concept based on an average person daily tasks, this data 
 The most expensive portion of each algorithm is building the knapsack array (O(nxW)) and sorting the df in the greedy algorithm (typically O(n log n)). Both are nelgibile when it comes to both time and space. With that being said if I wanted to be more efficient, the way the knapsack array is set up suggests there is a way to build it more efficiently such as making it a 1D array only capturing the traceback data, although it would require more research on my part.
 
 # Validation and Testing Plan
+The goal of this experiment is to prove that dynamic programming methods is comparable to natural greedy approaches. To do that we will create a score card comparing the two algorithms:
+
+**Total Priority Score**: How much do they differ?
+**Capacity Utlilization**: How much of cognitive load was used?
+**Number of Tasks Schedled**:How many tasks made are in each list?
+**Deadline Adherence**: Did this week tasks get scheduled appropriately?
+
+I will verify correctness, by creating a test example and testing if my data returns the example. 
+I will also create synthetic data that also can stress both algorithms. 
 
 # Updated Pitfall and Risk Log
 
