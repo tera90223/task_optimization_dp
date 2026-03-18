@@ -118,6 +118,7 @@ Goal: To return scheduled and unscheduled tasks after tracing the knapsack array
 ### Knapsack Driver
 ```
 Input: Leftover Tasks, Remaining Capacity
+Goal: Find the optimal combination of tasks is within the remaining cognitive capacity while maximizing total priority
 
 * array = Build knapsack array(tasks, W) 
 * scheduled, unscheduled = traceback(array, tasks) 
@@ -126,7 +127,24 @@ Input: Leftover Tasks, Remaining Capacity
 ```
 ## Greedy
 ```
-Input: Leftover Tasks, Remaining Capacity 
+Input: Leftover Tasks, Remaining Capacity
+Goal: To maximize priority greedily wihthin the remaining cognitive capacity
+
+* Sort Leftover tasks by priority descending
+* Then sort leftover tasks by (deadline + cost) ascending
+* Initialize current load to 0
+* Initialize empty scheduled list
+* Initialize tasks to unscheduled list
+
+* for each task in sorted tasks:
+   * task weight = deadline + cose 
+   if current_load + task weight <= remaining capacity 
+      * append task to scheduled list
+      * remove task from unscheduled list
+      * Add task weight to current load
+
+* return scheduled and unscheduled lists
+
 ```
 
 ## Scheduling_Deadline_Tasks
@@ -176,12 +194,6 @@ Input CSV file
       
 ```
 
-Provide pseudocode that:
-Has clear function signatures or step headings.
-Explicitly describes main loops, conditionals, and data structures.
-Handles at least one non-trivial edge case (e.g., empty input, unexpected characters, disconnected graph).
-Use code-style formatting (indented blocks, consistent naming) so that another student could implement it in Python or another language.
-main
 # Complexity and Bottlenecks
 # Validation and Testing Plan
 
