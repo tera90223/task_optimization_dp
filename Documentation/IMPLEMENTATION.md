@@ -1,6 +1,8 @@
 ## Project Snapshot 
 Research Question:  When both time and cognitive capacity are given, how does dynamic programming compare to greedy task-selection?
+
 Algorithm: 0/1 knapsack
+
 Current Implementation Status: In-progress
 
 ## What is Implemented?
