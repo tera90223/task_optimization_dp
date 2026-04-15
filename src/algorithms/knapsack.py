@@ -1,7 +1,13 @@
 import numpy as np
 
 def build_knapsack_array(tasks, capacity, time_budget):
-
+    """
+        Builds a 3D knapsack array that values priority while constrained by time and capacity
+        :param tasks: [pd.Dataframe] Tasks DF
+        :param capacity: [int] Capacity Budget
+        :param time_budget: [int] Time Budget
+        :return: knapsack array [np.ndarray] 3D array of shape (n_tasks+1, time_budget+1, capacity+1) where each cell [i][t][c] stores the maximum priority score achievable using the first i tasks within t minutes and c cognitive load points
+    """
     # INITIALIZATION
     weights_cog = tasks.cognitive_cost.tolist()
     weights_duration = tasks.duration.tolist()
@@ -41,6 +47,13 @@ def build_knapsack_array(tasks, capacity, time_budget):
     return knapsack_array
 
 def knapsack_traceback(knapsack_array, tasks):
+    """
+    Traces back through the knapsack array from the optimal cell to determine which tasks were selected
+    :param knapsack_array: [np.ndarray] 3D knapsack array
+    :param tasks: [pd.DataFrame] tasks DF
+    :return: scheduled [list] - scheduled tasks within both constraints
+             unscheduled [list] - tasks not selected
+    """
     scheduled = []
     unscheduled = tasks.task_name.tolist()
     duration_list = tasks.duration.tolist()
@@ -66,6 +79,15 @@ def knapsack_traceback(knapsack_array, tasks):
     return scheduled, unscheduled
 
 def knapsack(tasks, capacity, time_budget):
+    """
+    Knapsack Driver that finds the optimal combination of tasks within the cognitive capacity while maximizing total priority
+    :param tasks: [pd.DataFrame] tasks DF
+    :param capacity: [int] capacity budget
+    :param time_budget: [int] time budget
+    :return: scheduled [list] - scheduled tasks within both constraints
+             unscheduled [list] - tasks not selected
+
+    """
     array = build_knapsack_array(tasks, capacity, time_budget)
     scheduled, unscheduled = knapsack_traceback(array, tasks)
     return scheduled, unscheduled

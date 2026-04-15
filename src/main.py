@@ -8,7 +8,7 @@ from render import render_results
 def parse_args():
     parser = argparse.ArgumentParser(description='Task Optimization using DP and Greedy Algorithms')
 
-    parser.add_argument('--csv', type=str, default='../data/Version2_duration.csv', help='Path to existing task CSV file')
+    parser.add_argument('--csv', type=str, default='../data/real_todo_list.csv', help='Path to existing task CSV file')
     parser.add_argument('--generate', action='store_true', help='Generate synthetic task dataset')
     parser.add_argument('--n', type=int, default=10, help='Number of tasks to generate')
     parser.add_argument('--choice', type=str, choices=["default", "similar priorities", "high correlation"], default="default", help='Select dataset type')
@@ -20,6 +20,21 @@ def parse_args():
     return parser.parse_args()
 
 def build_score_card(task_df, results, cog_budget, time_budget):
+    """
+    Function builds a score card to easily interpret results.
+    Score card provides
+    - name of Algorithm
+    - Priority Score normalized to knapsack
+    - Time Utilization
+    - Cognitive Utilization
+    - Tasks Utilization
+
+    :param task_df: [pd.DataFrame] task DF
+    :param results: [dict] results of each algorithm
+    :param cog_budget: [int] total cognitive budget
+    :param time_budget: [int] total time budget
+    :return: score_card: [pd.DataFrame] score card for each algorithm
+    """
     score_card = pd.DataFrame()
     total_priority_per_alg = []
     total_duration_per_alg = []
@@ -53,17 +68,20 @@ def build_score_card(task_df, results, cog_budget, time_budget):
 
 if __name__ == "__main__":
     args = parse_args()
-
+    # if data is being generated, use data_generation to get synthetic data
     if args.generate:
         df = generate_dataset(n=args.n, seed=args.seed, choice=args.choice, save=args.save)
+    # else if provided a csv file, convert to df
     elif args.csv:
         with open(args.csv, mode='r', newline='') as csv_file:
             df = pd.read_csv(csv_file)
     else:
         raise ValueError("Must provide either --csv or --generate")
 
+
     cog_budget = args.cog_budget
     time_budget = args.time_budget
+    # Greedy variation map
     greedy_type = {"Priority_First": 0, "Duration_First": 1, "Highest_Value_Per_time": 2}
 
     results = {
@@ -73,6 +91,7 @@ if __name__ == "__main__":
         "greedy_ratio": {},
     }
 
+    # Get results for each algorithm or algorithm variation
     if len(df) > 0:
         results["knapsack"]["scheduled"], results["knapsack"]["unscheduled"] = knapsack(df, cog_budget, time_budget)
         results["greedy_priority"]["scheduled"], results["greedy_priority"]["unscheduled"] = greedy(df, time_budget,
@@ -86,8 +105,10 @@ if __name__ == "__main__":
     else:
         print("No tasks for today!")
 
+    # Compute score card
     score_card = build_score_card(task_df = df, results = results, cog_budget = cog_budget, time_budget = time_budget)
 
+    # Render results in html
     render_results(results, score_card)
 
 
