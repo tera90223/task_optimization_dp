@@ -1,9 +1,9 @@
 import argparse
 import pandas as pd
-import numpy as np
 from data_generation import generate_dataset
 from algorithms.knapsack import knapsack
 from algorithms.greedy import greedy
+from render import render_results
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Task Optimization using DP and Greedy Algorithms')
@@ -19,6 +19,37 @@ def parse_args():
 
     return parser.parse_args([])
 
+def build_score_card(task_df, results, cog_budget, time_budget):
+    score_card = pd.DataFrame()
+    total_priority_per_alg = []
+    total_duration_per_alg = []
+    total_cog_cost_per_alg = []
+    n_scheduled_per_alg = []
+
+    for algorithm in results.keys():
+        total_priority = 0
+        total_duration = 0
+        total_cog_cost = 0
+
+        for task in results[algorithm]["scheduled"]:
+            total_priority += task_df.loc[task_df["task_name"] == task, 'priority'].values[0]
+            total_duration += task_df.loc[task_df["task_name"] == task, 'duration'].values[0]
+            total_cog_cost += task_df.loc[task_df["task_name"] == task, 'cognitive_cost'].values[0]
+        if algorithm == "knapsack":
+            knapsack_total_priority = total_priority
+
+        total_priority_per_alg.append(round(total_priority / knapsack_total_priority, 2))
+        total_duration_per_alg.append(round(total_duration/time_budget, 2))
+        total_cog_cost_per_alg.append(round(total_cog_cost/cog_budget, 2))
+        n_scheduled_per_alg.append(round(len(results[algorithm]["scheduled"])/len(task_df), 2))
+
+    score_card["Algorithm"] = results.keys()
+    score_card[f"Priority Score (%)"] = total_priority_per_alg
+    score_card["Time Utilization (%) "] = total_duration_per_alg
+    score_card["Cognitive Utilization (%)"] = total_cog_cost_per_alg
+    score_card["Tasks Utilization (%)"] = n_scheduled_per_alg
+
+    return score_card
 
 if __name__ == "__main__":
     args = parse_args()
@@ -52,6 +83,15 @@ if __name__ == "__main__":
         results["greedy_ratio"]["scheduled"], results["greedy_ratio"]["unscheduled"] = greedy(df, time_budget,
                                                                                               greedy_type[
                                                                                                   "Highest_Value_Per_time"])
+    else:
+        print("No tasks for today!")
+
+    score_card = build_score_card(task_df = df, results = results, cog_budget = cog_budget, time_budget = time_budget)
+
+    render_results(results, score_card)
+
+
+
 
 
 
