@@ -17,7 +17,7 @@ def parse_args():
     parser.add_argument('--time_budget', type=int, default=240, help='Total Time budget for the day')
     parser.add_argument('--cog_budget', type=int, default=80, help='Total Cognitive budget for the day')
 
-    return parser.parse_args([])
+    return parser.parse_args()
 
 def build_score_card(task_df, results, cog_budget, time_budget):
     score_card = pd.DataFrame()
@@ -38,10 +38,10 @@ def build_score_card(task_df, results, cog_budget, time_budget):
         if algorithm == "knapsack":
             knapsack_total_priority = total_priority
 
-        total_priority_per_alg.append(round(total_priority / knapsack_total_priority, 2))
-        total_duration_per_alg.append(round(total_duration/time_budget, 2))
-        total_cog_cost_per_alg.append(round(total_cog_cost/cog_budget, 2))
-        n_scheduled_per_alg.append(round(len(results[algorithm]["scheduled"])/len(task_df), 2))
+        total_priority_per_alg.append(round(total_priority / knapsack_total_priority*100, 2))
+        total_duration_per_alg.append(round(total_duration/time_budget*100, 2))
+        total_cog_cost_per_alg.append(round(total_cog_cost/cog_budget*100, 2))
+        n_scheduled_per_alg.append(round(len(results[algorithm]["scheduled"])/len(task_df)*100, 2))
 
     score_card["Algorithm"] = results.keys()
     score_card[f"Priority Score (%)"] = total_priority_per_alg
