@@ -91,6 +91,10 @@ python main.py --generate --n 100 --choice "high correlation" --seed 42 --time_b
 ```bash
 python main.py --generate --n 100 --choice "high correlation" --seed 42 --save --time_budget 240 --cog_budget 100 
 ```
+## Notebook
+For a full walkthrough of the experiment including algorithm demonstration, validation, benchmarking, and discussion, 
+navigate to `notebooks/task_optimization_analysis.ipynb`. The notebook imports from `src` and is intended to be run from
+the project root. 
 
 ## Testing
 Unit tests are located in `tests/`. To run:
