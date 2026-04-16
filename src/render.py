@@ -7,7 +7,7 @@ def highlight_over_budget(val):
     :param val: [int] Cognitive Utilization value
     :return: [str] styling command that will change the font of the affected values to red
     """
-    return 'color: red' if val > 100 else ''
+    return 'color: red' if float(val) > 100 else ''
 
 def render_results(results, scorecard_df, output_path="output/results.html"):
     """
