@@ -61,7 +61,7 @@ def build_score_card(task_df, results, cog_budget, time_budget):
 
     score_card["Algorithm"] = results.keys()
     score_card[f"Priority Score (%)"] = total_priority_per_alg
-    score_card["Time Utilization (%) "] = total_duration_per_alg
+    score_card["Time Utilization (%)"] = total_duration_per_alg
     score_card["Cognitive Utilization (%)"] = total_cog_cost_per_alg
     score_card["Tasks Utilization (%)"] = n_scheduled_per_alg
 
