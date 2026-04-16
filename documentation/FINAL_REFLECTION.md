@@ -46,3 +46,14 @@ during runtime. Another idea is to add task dependencies as tasks are not always
 making time and cognitive capacity dynamic. Lastly, I would like to implement a version I introduced previously, but I 
 chalked down to scope creep which is to add another time layer due dates.
 
+## Generative AI Disclosure
+Tool: Claude Sonnet 4.6
+
+### How it was used:
+Claude was used as a thought partner throughout the design, implementation, and documentation stages. Specific use includes:
+* **Dataset design** - Discussing schema decisions and constraint budget selection
+* **HTML Rendering** - Designing the Jinja2 template structure and scorecard normalization approach
+* **Writing** - Refining reflections, observations, and documentation for clarity and technical accuracy
+### Influence on implementation:
+All code was written by me. Claude was used to test my reasoning and catch bugs rather than generate implementation directly.
+The AI was used as a sound board and design decisions, implementations, and interpretation of results were also made by me.
