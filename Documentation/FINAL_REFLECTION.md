@@ -1,17 +1,48 @@
 ## What Went Right
-Specific technical and process-related successes (e.g., design decisions that paid off, effective testing strategies, fruitful data choices).
-What were the personal learning successes that you experienced?
+The knapsack and greedy algorithms were implemented early which gave me more time concerning design decisions and
+how I wanted to render the results. I also think the modulation of the functions allowed me to easily implement a 
+command-line compatible platform. I am proud I was able to implement the html version of the results as one of my 
+classmates focus on the user experience pushed me to visually showcase my results. The html is simple but I think it is
+easier to digest the results. 
+
+I also was personally happy I was able to implement the three greedy variations as it definitely provided a more
+comprehensive discussion. 
+
+Choosing to synthesize dataset based on real to-do lists also proved to be a strong design choice. 
+It allowed for more interpretability and was more personally meaningful to me as I chose cognitive capacity, because I 
+struggle with burnout often. 
+
 ## What Went Wrong or Was Hard
-Concrete challenges or missteps (e.g., underestimated complexity, unstable training, bad initial data).
-What would you do differently if you started over?
-What were your personal learning obstacles during this project? How did you attempt to address them, and how would you fix them if you couldn't?
+
+Originally making a 3d array was hard to implement as I could not understand how the array could be 3D, but once I 
+created a visual, it was easier for me to navigate. With that being said, I used numpy arrays and did not take 
+advantage of vectorization mostly because I did not know it was a feature until after I implemented the array. 
+If I could do things differently, I would have used vectorization. 
+I also think that designing the implementation of the experiment was tedious. I knew exactly what I wanted to test, 
+but to implement it in a way that was reasonable to my peers and was also streamlined so they wouldn't have to jump 
+from code to code was harder to think through. 
+I also used some elementary coding practices, such as using a map instead of enum to reference greedy variation, 
+due to time constraints. I do feel If I had more time, I would think about ways to be more efficient. Lastly, I would
+have liked to spent more time analyzing my results. While finishing up my final V1 of the experiment, I thought about 
+more thoughtful ways to analyze my results.
+
 ## Algorithmic Lessons
-Insights about your chosen algorithm/class in real use.
-How well does it fit the problem?
-Tradeoffs between accuracy, complexity, and implementation complexity.
-Any surprises compared to how it was presented in the lecture or text?
+0/1 Knapsack algorithm was a natural fit for my problem since task optimization is inherently a breakdown of subproblems.
+For each task you have to see if you have the time and capacity to complete it and if including it with the other tasks
+leads to a better combination than excluding it The knapsack table captures this by building up the answers starting 
+from no tasks or budget to all tasks using previously computed answers to evaluate each step.
+
+With that being said, we did optimize by priority another user-assigned feature. This means the algorithm is as good as 
+the users input and so if the user is inaccurate concerning priority, their cognitive capacity, or their time budget, 
+they will receive suboptimal recommendations. 
+
+One surprise was how well the ratio-based greedy matched the knapsack solution on my default dataset. Based on multiple
+runs, greedy is not able to guarantee optimal results, but in the situation that it does, it does raise a question 
+concerning if DP is ALWAYS necessary and if not, when should it be utilized?
+
 ## Future Directions
-Ideas for extending or improving the project (algorithm variants, better data, different evaluation methods, integration into larger pipelines).
-## Generative AI Disclosure (If Used)
-As 
-before, include tool/version, prompts, and a transparent account of how you used generative AI, if applicable.
+Some ideas for improving my project is to introduce vectorization to the knapsack algorithm to increase efficiency 
+during runtime. Another idea is to add task dependencies as tasks are not always dependencies and to experiment with 
+making time and cognitive capacity dynamic. Lastly, I would like to implement a version I introduced previously, but I 
+chalked down to scope creep which is to add another time layer due dates.
+

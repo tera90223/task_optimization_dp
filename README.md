@@ -21,8 +21,12 @@ proposed system produces meaningfully different task selections.
 Dynamic Programming: 0/1 Knapsack 
 
 ### Expected Data and Outputs
-**Input:** A CSV file containing task data, or synthetically generated data using the 
-built-in data generation module.
+**Input:** Two curated datasets are provided in `data/`:
+- `real_todo_list.csv` - real to-do list used as primary example
+- `divergence_todo_list.csv` - designed to demonstrate knapsack vs greedy ratio divergence
+
+Synthetic datasets can be generated via `--generate` flag. See Usage and Options.
+
 **Output:** An HTML file summarizing task selection produced by the 0/1 knapsack algorithm and 
 three greedy variations, alongside a normalized scorecard for cross-algorithm comparison.
 
