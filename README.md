@@ -37,14 +37,21 @@ three greedy variations, alongside a normalized scorecard for cross-algorithm co
 ```bash
 git clone https://github.com/tera90223/task_optimization_dp.git
 ```
-
-2. Create a virtual environment:
+2. Move into project directory
+```bash
+cd task_optimization_dp
+```
+3. Switch to projectDP_PR branch
+```bash
+git checkout projectDP_PR
+```
+4. Create a virtual environment:
 ```bash
 python -m venv .venv
 source .venv/bin/activate # Mac/Linux
 .venv\Scripts\activate    # Windows
 ```
-3. Install dependencies:
+5. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
