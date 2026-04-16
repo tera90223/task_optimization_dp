@@ -106,3 +106,4 @@ def test_scorecard():
     #expected_columns =
     assert list(scorecard.columns) == ['Algorithm', 'Priority Score (%)', 'Time Utilization (%)', 'Cognitive Utilization (%)',
                         'Tasks Utilization (%)']
+
