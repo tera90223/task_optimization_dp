@@ -92,6 +92,15 @@ python main.py --generate --n 100 --choice "high correlation" --seed 42 --time_b
 python main.py --generate --n 100 --choice "high correlation" --seed 42 --save --time_budget 240 --cog_budget 100 
 ```
 
+## Testing
+Unit tests are located in `tests/`. To run:
+
+```bash
+pytest tests/tests.py -v
+```
+
+Tests cover knapsack and greedy algorithm correctness, budget constraint validation, task list integrity, and scorecard output.
+
 ## Limitations and Assumptions
 User input can be only be a CSV file with the following columns:
 
