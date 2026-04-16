@@ -37,13 +37,13 @@ three greedy variations, alongside a normalized scorecard for cross-algorithm co
 ```bash
 git clone https://github.com/tera90223/task_optimization_dp.git
 ```
-2. Switch to projectDP_PR branch
-```bash
-git checkout projectDP_PR
-```
-3. Move into project directory
+2. Move into project directory
 ```bash
 cd task_optimization_dp
+```
+3. Switch to projectDP_PR branch
+```bash
+git checkout projectDP_PR
 ```
 4. Create a virtual environment:
 ```bash
