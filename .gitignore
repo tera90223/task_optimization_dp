@@ -1,0 +1,6 @@
+.idea/
+output/
+src/__pycache__/
+src/algorithms/__pycache__/
+
+.venv/
